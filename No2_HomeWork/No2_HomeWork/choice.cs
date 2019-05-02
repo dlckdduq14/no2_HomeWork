@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace No2_HomeWork
 {
-    public enum choice
+    public enum Choice
     {
         yes = 1,
         no

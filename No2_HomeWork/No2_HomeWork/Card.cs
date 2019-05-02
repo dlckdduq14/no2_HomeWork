@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace No2_HomeWork
 {
-    //( pricate < protected < internal _헌프로젝트안에서만 접근가능 < public )
+    //( private < protected < internal _헌프로젝트안에서만 접근가능 < public )
     public class Card //( public으로 했을땐 다른프로젝트에서도 사용가능) 
     {
         public Card(int no, bool isKwang)
