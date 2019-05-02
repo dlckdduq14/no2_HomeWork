@@ -8,7 +8,7 @@ namespace No2_HomeWork
 {
     class Program
     {
-        public const int PlayerConunt = 2;
+        public const int PlayerConunt = 4;
         public const int SeedMoney = 1000;
         public const int DebtInit = 0;
         private const int BetMoney = 100;
