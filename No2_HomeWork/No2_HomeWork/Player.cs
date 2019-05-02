@@ -50,5 +50,10 @@ namespace No2_HomeWork
             _cards.Clear(); //카드 초기화
             Score = 0;
         }
+
+        public void Remove(int i)
+        {
+            _cards.RemoveAt(i);
+        }
     }
 }

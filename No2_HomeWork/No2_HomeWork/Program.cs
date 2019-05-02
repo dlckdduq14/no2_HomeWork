@@ -8,7 +8,7 @@ namespace No2_HomeWork
 {
     class Program
     {
-        public const int PlayerConunt = 4;
+        public const int PlayerCount = 2;
         public const int SeedMoney = 1000;
         public const int DebtInit = 0;
         private const int BetMoney = 100;
@@ -17,7 +17,7 @@ namespace No2_HomeWork
             // 각 선수들이 시드머니를 가진다.
             List<Player> players = new List<Player>();
 
-            for (int i = 0; i < PlayerConunt; i++)
+            for (int i = 0; i < PlayerCount; i++)
                 players.Add(new Player(SeedMoney, DebtInit, i));
 
             int round = 1;
@@ -99,14 +99,34 @@ namespace No2_HomeWork
                 for (int i = 0; i < 2; i++)
                     player.AddCard(dealer.Draw());
 
-            // 각 선수들의 족보를 계산하고 출력한다.
+            // 각 선수들의 족보를 계산하고 출력한다.(처음)
             for (int i = 0; i < players.Count; i++)
             {
                 Player p = players[i];
 
                 players[i].CalculateScore();
                 Console.WriteLine($"P{i} ({p[0]},{p[1]}) => {p.Score}");
+                Console.WriteLine($"P{i}는 카드를 교체 하시겠습니까? 당신은 지금 {p.Score}점입니다. (0. 교체 , 1. 미교체) ");
+                string inputText = Console.ReadLine();
+                int input = int.Parse(inputText);
+                if (input == 0)
+                {
+                    Console.WriteLine($"어떤 카드를 교체 하시겠습니까 (0 : {p[0]}, 1 : {p[1]})");
+                    string inputText2 = Console.ReadLine();
+                    int input2 = int.Parse(inputText2);
+                    players[i].Remove(input2);
+                    p.AddCard(dealer.Draw());
+                }
             }
+            // 각 선수들의 족보를 계산하고 출력한다.(최종)
+            Console.WriteLine("각자 고른 카드로 계산합니다.");
+                    for (int i = 0; i < players.Count; i++)
+                    {
+                        Player p = players[i];
+
+                        players[i].CalculateScore();
+                        Console.WriteLine($"P{i} ({p[0]},{p[1]}) => {p.Score}");
+                    }
 
             // 승자와 패자를 가린다.
             Player winner = FindWinner(players);
