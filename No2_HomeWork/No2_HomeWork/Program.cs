@@ -56,9 +56,7 @@ namespace No2_HomeWork
                         confirmed_loser.Debt += 500;
                     }
                 }
-
             }
-
         }
 
         private static void PrintMoney(List<Player> players)
