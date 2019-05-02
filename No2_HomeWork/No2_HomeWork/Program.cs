@@ -36,24 +36,24 @@ namespace No2_HomeWork
 
                 Console.WriteLine();
 
-                // 승자와 패자를 가린다.
-                Player winner = FindWinner(players);
-                Player loser = Loser(players);
+                // 최종 승자와 패자를 가린다.
+                Player confirmed_winner = FindWinner(players);
+                Player confirmed_loser = Loser(players);
 
 
-                if (loser.Money == 0 && loser.Debt == 500)
-                    Console.WriteLine($" P{loser.Name}가 파산했습니다. 승자는 P{winner.Name} 입니다.");
+                if (confirmed_loser.Money == 0 && confirmed_loser.Debt == 500)
+                    Console.WriteLine($" P{confirmed_loser.Name}가 파산했습니다. 승자는 P{confirmed_winner.Name} 입니다.");
 
-                if (loser.Money == 0 && loser.Debt == 0)
+                if (confirmed_loser.Money == 0 && confirmed_loser.Debt == 0)
                 {
-                    Console.WriteLine($" P{winner.Name} 가 이겼습니다. P{loser.Name}에게 충전 하겠습니까? (1.예 , 2.아니오)");
+                    Console.WriteLine($" P{confirmed_winner.Name} 가 이겼습니다. P{confirmed_loser.Name}에게 충전 하겠습니까? (1.예 , 2.아니오)");
                     string inputText = Console.ReadLine();
                     int input = int.Parse(inputText);
 
                     if (input == 1)
                     {
-                        loser.Money += 500;
-                        loser.Debt += 500;
+                        confirmed_loser.Money += 500;
+                        confirmed_loser.Debt += 500;
                     }
                 }
 
@@ -99,7 +99,7 @@ namespace No2_HomeWork
                 for (int i = 0; i < 2; i++)
                     player.AddCard(dealer.Draw());
 
-            // 각 선수들의 족보를 계산하고 출력한다.(처음)
+            // 각 선수들의 족보를 계산하고 카드변경의사를 확인한다.
             for (int i = 0; i < players.Count; i++)
             {
                 Player p = players[i];
@@ -107,18 +107,18 @@ namespace No2_HomeWork
                 players[i].CalculateScore();
                 Console.WriteLine($"P{i} ({p[0]},{p[1]}) => {p.Score}");
                 Console.WriteLine($"P{i}는 카드를 교체 하시겠습니까? 당신은 지금 {p.Score}점입니다. (0. 교체 , 1. 미교체) ");
-                string inputText = Console.ReadLine();
-                int input = int.Parse(inputText);
-                if (input == 0)
+                string Choices = Console.ReadLine();
+                int Choiced = int.Parse(Choices);
+                if (Choiced == 0)
                 {
                     Console.WriteLine($"어떤 카드를 교체 하시겠습니까 (0 : {p[0]}, 1 : {p[1]})");
-                    string inputText2 = Console.ReadLine();
-                    int input2 = int.Parse(inputText2);
-                    players[i].Remove(input2);
+                    string WhatChange = Console.ReadLine();
+                    int RemoveCard = int.Parse(WhatChange);
+                    players[i].Remove(RemoveCard);
                     p.AddCard(dealer.Draw());
                 }
             }
-            // 각 선수들의 족보를 계산하고 출력한다.(최종)
+            // 각 선수들의 최종 족보를 계산하고 출력한다.
             Console.WriteLine("각자 고른 카드로 계산합니다.");
                     for (int i = 0; i < players.Count; i++)
                     {
